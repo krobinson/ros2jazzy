@@ -10,6 +10,20 @@
 	// 	}
 	// },
 	// "context": ".",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"version": "latest",
+			"enableNonRootDocker": "true",
+			"moby": "false"
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "3.12.4",
+			"installJupyterlab": "true"
+		},
+		"ghcr.io/devcontainers-contrib/features/apt-packages:1": {
+			"packages": "x11-xserver-utils"
+		}
+	},
 	"remoteUser": "ros_user",
 	"onCreateCommand": "xhost +local:docker",
 	"postCreateCommand": "/usr/local/bin/build_ws",
@@ -20,11 +34,12 @@
 		"--security-opt=seccomp:unconfined", // allows the container to run without a security profile for debugging
 		"--security-opt=apparmor:unconfined", // allows the container more access to the host network
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",  // Only needed on linux, Comment if you are on Windows
+		//"--volume=/dev/dri:/dev/dri",
 		"--mount", "type=bind,source=${localWorkspaceFolder}/src/,target=/home/ros_user/ros2_ws/src", // mount the ros2_src folder into the container
-		"--gpus=all",  // this is needed for hardware acceleration on nvidia gpus
+		//"--gpus=all",  // this is needed for hardware acceleration on nvidia gpus
 		// "--volume=/mnt/wslg:/mnt/wslg", // uncomment to use wslg
-		"--ipc=host", // allow the container to share the same Inter-Process Communcation (IPC) namespace as the host
-		"--device=/dev/dri" // uncomment to use intel iGPU
+		"--ipc=host"//, // allow the container to share the same Inter-Process Communcation (IPC) namespace as the host
+		//"--device=/dev/dri" // uncomment to use intel iGPU
 	],
 	"containerEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows

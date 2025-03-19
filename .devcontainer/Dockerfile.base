@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl git sudo lsb-release locales bash-completion tzdata gosu \
     tmux xterm less bc build-essential htop psmisc neovim pip \
     python3-rosdep python3-vcstool python3-argcomplete python3-colcon-common-extensions \
+    nvidia-container-toolkit \
     ros-dev-tools --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
